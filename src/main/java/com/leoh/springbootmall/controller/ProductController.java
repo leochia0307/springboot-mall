@@ -1,6 +1,7 @@
 package com.leoh.springbootmall.controller;
 
 import com.leoh.springbootmall.constant.ProductCategory;
+import com.leoh.springbootmall.dto.ProductQueryParams;
 import com.leoh.springbootmall.dto.ProductRequest;
 import com.leoh.springbootmall.model.Product;
 import com.leoh.springbootmall.service.ProductService;
@@ -21,10 +22,21 @@ public class ProductController {
 
     @GetMapping("/products")
     public ResponseEntity<List<Product>> getProducts(
+            // 查詢條件 Filtering
             @RequestParam(required = false) ProductCategory category,
             @RequestParam(required = false) String search
+
+//            // 排序 Sorting
+//            @RequestParam(defaultValue = "create_date") String orderBy,
+//            @RequestParam(defaultValue = "desc") String sort
     ) {
-        List<Product> productList = productService.getProducts(category, search);
+        ProductQueryParams productQueryParams = new ProductQueryParams();
+        productQueryParams.setCategory(category);
+        productQueryParams.setSearch(search);
+//        productQueryParams.setOrderBy(orderBy);
+//        productQueryParams.setSort(sort);
+
+        List<Product> productList = productService.getProducts(productQueryParams);
 
         return ResponseEntity.status(HttpStatus.OK).body(productList);
     }

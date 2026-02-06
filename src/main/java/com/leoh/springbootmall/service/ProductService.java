@@ -1,6 +1,6 @@
 package com.leoh.springbootmall.service;
 
-import com.leoh.springbootmall.constant.ProductCategory;
+import com.leoh.springbootmall.dto.ProductQueryParams;
 import com.leoh.springbootmall.dto.ProductRequest;
 import com.leoh.springbootmall.model.Product;
 import jakarta.validation.Valid;
@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ProductService {
 
-    List<Product> getProducts(ProductCategory category, String search);
+    List<Product> getProducts(ProductQueryParams productQueryParams);
 
     Product getProductById(Integer productId);
 
